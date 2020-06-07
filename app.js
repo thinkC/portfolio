@@ -28,8 +28,6 @@ app.use(bodyParser.json());
 //console.log(process.env.DATABASEURL);
 var url = process.env.DATABASEURL || "mongodb://localhost/aquarium";
 mongoose.connect(url, { useMongoClient: true });
-//mongoose.connect(process.env.DATABASEURL, {useMongoClient: true});
-//mongoose.connect("mongodb://Tunde:passw0rd1@ds131997.mlab.com:31997/aquarium", {useMongoClient: true});
 
 app.use(methodOverride("_method"));
 app.use(flash());

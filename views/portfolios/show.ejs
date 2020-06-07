@@ -1,0 +1,62 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p>Aquarium</p>
+            <div>
+                <li class="list-group-item active">info 1</li>
+                <li class="list-group-item">info 2</li>
+                <li class="list-group-item">info 3</li>
+            </div>
+            
+        </div>
+        <div class="col-md-9">
+            <div class="caption-full">
+                <h2><%= portfoliosVar.name %></h2>
+            </div>
+            <div class="thumbnail">
+                <a href="<%= portfoliosVar.link %>" target="_blank"><img style="width:100%" class="image-responsive" src="<%= portfoliosVar.image %>"></a>
+                <p><em>Submitted by <%=portfoliosVar.author.username %></em></p>
+                
+                
+                 <% if(currentUser && portfoliosVar.author.id.equals(currentUser._id)){%>
+                <a class="btn btn-warning btn-xs" href="/portfolios/<%=portfoliosVar._id%>/edit">Edit</a>
+                <form style="display: inline" action="/portfolios/<%= portfoliosVar._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger btn-xs">Delete</button>
+                </form>
+                <% }    else if (currentUser && (currentUser._id == "5a464e6b2a315e09ea5a2873")){ %> 
+                       
+                        <a class="btn btn-warning btn-xs" href="/portfolios/<%=portfoliosVar._id%>/edit">Edit</a>
+                        <form style="display: inline" action="/portfolios/<%= portfoliosVar._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger btn-xs">Delete</button>
+                </form>
+                   <% } %>
+
+                
+                <p><a href="<%= portfoliosVar.link %>" target="_blank">Please click to view page</a></p>
+            </div>
+            <div class="well">
+                <p><a class="btn btn-success" href="/portfolios/<%=portfoliosVar._id %>/comments/new">Add New Comment</a></p>
+            <hr>
+             <%for(var i = 0; i < portfoliosVar.comments.length; i++){ %>
+            <div class="row">
+               <div class="md-col-12">
+                   <strong><%= portfoliosVar.comments[i].author.username %> </strong>
+                   <span class="pull-right">5 Days ago</span>
+                   <p><%= portfoliosVar.comments[i].text %></p>
+                   <% if(currentUser && portfoliosVar.comments[i].author.id.equals(currentUser.id) || currentUser && (currentUser._id == "5a464e6b2a315e09ea5a2873")){ %>
+                  <a class="btn btn-xs btn-warning" href="/portfolios/<%=portfoliosVar._id%>/comments/<%=portfoliosVar.comments[i]._id%>/edit">Edit</a>
+                  <form style="display: inline" action="/portfolios/<%=portfoliosVar._id%>/comments/<%=portfoliosVar.comments[i]._id%>?_method=DELETE" method="POST">
+                      <input type="submit" class="btn btn-xs btn-danger" value="delete">
+                  </form>
+                  <% } %>
+               </div> 
+            </div>
+            <% } %>
+            </div>
+        </div>
+
+</div>
+</div>
+<% include ../partials/footer %>
+

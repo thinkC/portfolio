@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+<header class="jumbotron">
+    <div class="container">
+        <h1>This is the Porfolio Page!</h1>
+        <a href="/portfolios/new" class="btn btn-lg btn-primary">Add New Portfolio</a>
+    </div>
+</header>
+
+<div class="row" style="display:flex; flex-wrap : wrap">  
+<% for(var i = 0; i < portfoliosVar.length; i++){ %>
+    <div class="col-md-3 col-sm-6">
+    <div class="caption text-center">
+    <h4><%= portfoliosVar[i].name %></h4>
+    </div>
+    <div class="thumbnail">
+    <img src="<%= portfoliosVar[i].image %>">
+    </div>
+    <p>
+        <a href="/portfolios/<%=portfoliosVar[i]._id %>" class="btn btn-primary">More Info</a>
+    </p>
+    </div>
+<% } %>
+</div> 
+<a href="/">Go Back</a>
+</div>
+<% include ../partials/footer %>
